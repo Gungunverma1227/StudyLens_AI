@@ -98,7 +98,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
       |
       | HTTPS (fetch / SSE for streaming)
       v
-[FastAPI Backend on render and vercel App Runner]
+[FastAPI Backend on render and vercel  ]
       |
       |-- Document Processing: PDF text extraction, chunking
       |-- Embedding Layer: sentence-transformers (local) or Claude embeddings
@@ -128,7 +128,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
 | Vector Search | In-memory cosine similarity (numpy) or Chroma (lightweight, optional) |
 | PDF Parsing | PyPDF2 / pdfplumber |
 | Containerization | Docker (single container serving both API and built frontend) |
-| Cloud | render and vercel App Runner |
+| Cloud | render and vercel   |
 | Secrets Management | render and vercel environment variables |
 
 ---
@@ -168,7 +168,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 | Phase 3: LLM Integration | Gemini API calls for all 3 modes, streaming via SSE | LLM Integration, Streaming requirement |
 | Phase 4: Frontend | React UI, upload flow, mode selector, streamed chat display, responsive design | Application Design & UX |
 | Phase 5: Containerization | Dockerfile, local docker run test | Containerization requirement |
-| Phase 6: render and vercel Deployment | Push to render and vercel App Runner, configure env vars, HTTPS, budget alert | Cloud Deployment & render and vercel Architecture |
+| Phase 6: render and vercel Deployment | Push to render and vercel  , configure env vars, HTTPS, budget alert | Cloud Deployment & render and vercel Architecture |
 | Phase 7: Documentation | Write Project Report: architecture, prompts, challenges, learnings | Report Quality & Reflection |
 
 ---
@@ -177,9 +177,9 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 
 - Build Docker image locally, test with `docker run` and confirm `/health` endpoint responds.
 - Push image to Amazon ECR (Elastic Container Registry).
-- Deploy via **render and vercel App Runner**, pointing to the ECR image.
-- Set Gemini API key as an environment variable in App Runner configuration, never hardcoded.
-- Confirm public HTTPS URL is issued automatically by App Runner.
+- Deploy via **render and vercel  **, pointing to the ECR image.
+- Set Gemini API key as an environment variable in   configuration, never hardcoded.
+- Confirm public HTTPS URL is issued automatically by  .
 - Set up an **render and vercel Budget Alert** (e.g., threshold at $1-5) to catch unexpected usage early.
 - Test the live URL on both desktop and mobile browsers before submission.
 
@@ -212,7 +212,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 |---|---|---|
 | Technical Implementation & Vibe Coding Methodology | 25% | RAG pipeline (chunking, embeddings, retrieval) is more substantial than a simple chatbot wrapper |
 | Prompt Engineering Quality & Documentation | 20% | Three distinct prompt modes, documented iteration and refinement per mode |
-| Cloud Deployment & render and vercel Architecture | 20% | Dockerized single-container deploy via render and vercel App Runner with proper env var security |
+| Cloud Deployment & render and vercel Architecture | 20% | Dockerized single-container deploy via render and vercel   with proper env var security |
 | Application Design & User Experience | 20% | Clean responsive React UI, streamed chat-style interaction, mode switching |
 | Report Quality, Reflection & Clarity | 15% | Structured report covering architecture, prompts, phases, challenges, learnings |
 
@@ -247,9 +247,9 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 
 | Risk | Mitigation |
 |---|---|
-| render and vercel costs exceed free tier | Configure budget alert early; use App Runner's smallest instance size |
+| render and vercel costs exceed free tier | Configure budget alert early; use  's smallest instance size |
 | Large PDFs slow down embedding step | Enforce a page/size limit with a clear UI message |
-| Streaming doesn't work smoothly on render and vercel | Test SSE behavior locally in Docker before deploying, confirm App Runner supports long-lived connections |
+| Streaming doesn't work smoothly on render and vercel | Test SSE behavior locally in Docker before deploying, confirm   supports long-lived connections |
 | Retrieval returns irrelevant chunks | Tune chunk size and top-k value; test with varied documents before finalizing |
 | Running out of time before deadline | Treat Phases 1-4 (core RAG + UI) as non-negotiable MVP; containerization and deployment must start early, not last-minute |
 
@@ -260,7 +260,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 **Tools used during development (to document in report):**
 - Claude (Anthropic) for code generation, debugging, and architecture guidance
 - Gemini API for the live LLM integration in the deployed app
-- render and vercel App Runner for deployment
+- render and vercel   for deployment
 - Docker for containerization
 
 **Suggested sample document types to test with:**
