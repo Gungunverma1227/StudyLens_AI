@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary
 
-StudyLens AI is a full-stack, AI-powered web application that lets a user upload or paste any document (lecture notes, research papers, articles, textbook chapters) and interact with it through three modes: **Summarize**, **Ask Questions (RAG-based Q&A)**, and **Generate Quiz**. The backend uses Retrieval-Augmented Generation (RAG) to ground the LLM's responses in the actual uploaded content, streamed to the frontend in real time. The application is containerized with Docker and deployed publicly on AWS.
+StudyLens AI is a full-stack, AI-powered web application that lets a user upload or paste any document (lecture notes, research papers, articles, textbook chapters) and interact with it through three modes: **Summarize**, **Ask Questions (RAG-based Q&A)**, and **Generate Quiz**. The backend uses Retrieval-Augmented Generation (RAG) to ground the LLM's responses in the actual uploaded content, streamed to the frontend in real time. The application is containerized with Docker and deployed publicly on render and vercel.
 
 This directly matches IBM's suggested themes of "Document Analyzer" and "Learning & Quiz Tool," combined into one cohesive product, while giving strong material for the Prompt Engineering and Technical Implementation criteria in the grading rubric.
 
@@ -26,7 +26,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
 
 - Build a working RAG pipeline that grounds LLM answers in user-uploaded content (not just general model knowledge).
 - Demonstrate three distinct prompting strategies (summarization, contextual Q&A, quiz generation) with documented iteration.
-- Ship a fully containerized, publicly accessible application on AWS within free-tier limits.
+- Ship a fully containerized, publicly accessible application on render and vercel within free-tier limits.
 - Produce a UI that is clean, responsive, and usable on both desktop and mobile.
 - Document the full build process, prompts used, and architecture for the Project Report deliverable.
 
@@ -54,7 +54,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
 - Streamed responses (token-by-token rendering)
 - Responsive frontend (desktop + mobile)
 - Dockerized backend + frontend
-- Deployed live on AWS with HTTPS
+- Deployed live on render and vercel with HTTPS
 
 ### 5.2 Out of Scope (Future Enhancements)
 - Multi-document cross-referencing
@@ -87,7 +87,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
 - **Performance:** Initial response token should stream within 2-3 seconds of a request.
 - **Responsiveness:** UI must work cleanly on mobile viewport widths (360px+) and desktop.
 - **Reliability:** Application should handle malformed or very large PDFs gracefully (size limit with clear user message).
-- **Cost:** Must stay within AWS free-tier limits; budget alert configured.
+- **Cost:** Must stay within render and vercel free-tier limits; budget alert configured.
 
 ---
 
@@ -98,7 +98,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
       |
       | HTTPS (fetch / SSE for streaming)
       v
-[FastAPI Backend on AWS App Runner]
+[FastAPI Backend on render and vercel App Runner]
       |
       |-- Document Processing: PDF text extraction, chunking
       |-- Embedding Layer: sentence-transformers (local) or Claude embeddings
@@ -128,8 +128,8 @@ Students and self-learners regularly deal with dense, unstructured study materia
 | Vector Search | In-memory cosine similarity (numpy) or Chroma (lightweight, optional) |
 | PDF Parsing | PyPDF2 / pdfplumber |
 | Containerization | Docker (single container serving both API and built frontend) |
-| Cloud | AWS App Runner |
-| Secrets Management | AWS environment variables |
+| Cloud | render and vercel App Runner |
+| Secrets Management | render and vercel environment variables |
 
 ---
 
@@ -155,7 +155,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 | `/summarize/{doc_id}` | POST | Streams a summary of the document |
 | `/ask/{doc_id}` | POST | Accepts a question, streams a RAG-grounded answer |
 | `/quiz/{doc_id}` | POST | Streams generated quiz questions + answer key |
-| `/health` | GET | Health check for AWS deployment monitoring |
+| `/health` | GET | Health check for render and vercel deployment monitoring |
 
 ---
 
@@ -168,19 +168,19 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 | Phase 3: LLM Integration | Claude API calls for all 3 modes, streaming via SSE | LLM Integration, Streaming requirement |
 | Phase 4: Frontend | React UI, upload flow, mode selector, streamed chat display, responsive design | Application Design & UX |
 | Phase 5: Containerization | Dockerfile, local docker run test | Containerization requirement |
-| Phase 6: AWS Deployment | Push to AWS App Runner, configure env vars, HTTPS, budget alert | Cloud Deployment & AWS Architecture |
+| Phase 6: render and vercel Deployment | Push to render and vercel App Runner, configure env vars, HTTPS, budget alert | Cloud Deployment & render and vercel Architecture |
 | Phase 7: Documentation | Write Project Report: architecture, prompts, challenges, learnings | Report Quality & Reflection |
 
 ---
 
-## 13. AWS Deployment Plan
+## 13. render and vercel Deployment Plan
 
 - Build Docker image locally, test with `docker run` and confirm `/health` endpoint responds.
 - Push image to Amazon ECR (Elastic Container Registry).
-- Deploy via **AWS App Runner**, pointing to the ECR image.
+- Deploy via **render and vercel App Runner**, pointing to the ECR image.
 - Set Claude API key as an environment variable in App Runner configuration, never hardcoded.
 - Confirm public HTTPS URL is issued automatically by App Runner.
-- Set up an **AWS Budget Alert** (e.g., threshold at $1-5) to catch unexpected usage early.
+- Set up an **render and vercel Budget Alert** (e.g., threshold at $1-5) to catch unexpected usage early.
 - Test the live URL on both desktop and mobile browsers before submission.
 
 ---
@@ -192,7 +192,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 - [ ] No secrets present in frontend bundle (verify via browser dev tools/network tab)
 - [ ] CORS configured to only allow expected origins
 - [ ] File upload size limits enforced to prevent abuse
-- [ ] AWS budget alert configured
+- [ ] render and vercel budget alert configured
 
 ---
 
@@ -212,7 +212,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 |---|---|---|
 | Technical Implementation & Vibe Coding Methodology | 25% | RAG pipeline (chunking, embeddings, retrieval) is more substantial than a simple chatbot wrapper |
 | Prompt Engineering Quality & Documentation | 20% | Three distinct prompt modes, documented iteration and refinement per mode |
-| Cloud Deployment & AWS Architecture | 20% | Dockerized single-container deploy via AWS App Runner with proper env var security |
+| Cloud Deployment & render and vercel Architecture | 20% | Dockerized single-container deploy via render and vercel App Runner with proper env var security |
 | Application Design & User Experience | 20% | Clean responsive React UI, streamed chat-style interaction, mode switching |
 | Report Quality, Reflection & Clarity | 15% | Structured report covering architecture, prompts, phases, challenges, learnings |
 
@@ -229,7 +229,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 - [ ] Expected user experience and outcomes
 
 **2. Live Application**
-- [ ] Deployed and publicly accessible via AWS URL
+- [ ] Deployed and publicly accessible via render and vercel URL
 - [ ] Fully functional at submission time
 - [ ] URL pasted in both Concept Note and Report
 
@@ -247,9 +247,9 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 
 | Risk | Mitigation |
 |---|---|
-| AWS costs exceed free tier | Configure budget alert early; use App Runner's smallest instance size |
+| render and vercel costs exceed free tier | Configure budget alert early; use App Runner's smallest instance size |
 | Large PDFs slow down embedding step | Enforce a page/size limit with a clear UI message |
-| Streaming doesn't work smoothly on AWS | Test SSE behavior locally in Docker before deploying, confirm App Runner supports long-lived connections |
+| Streaming doesn't work smoothly on render and vercel | Test SSE behavior locally in Docker before deploying, confirm App Runner supports long-lived connections |
 | Retrieval returns irrelevant chunks | Tune chunk size and top-k value; test with varied documents before finalizing |
 | Running out of time before deadline | Treat Phases 1-4 (core RAG + UI) as non-negotiable MVP; containerization and deployment must start early, not last-minute |
 
@@ -260,7 +260,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 **Tools used during development (to document in report):**
 - Claude (Anthropic) for code generation, debugging, and architecture guidance
 - Claude API for the live LLM integration in the deployed app
-- AWS App Runner for deployment
+- render and vercel App Runner for deployment
 - Docker for containerization
 
 **Suggested sample document types to test with:**
