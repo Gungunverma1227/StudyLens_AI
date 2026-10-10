@@ -106,14 +106,14 @@ Students and self-learners regularly deal with dense, unstructured study materia
       |-- Prompt Orchestration Layer: builds mode-specific prompts
       |
       v
-[Anthropic Claude API] --> streamed response --> [Backend] --> [Frontend]
+[Anthropic Gemini API] --> streamed response --> [Backend] --> [Frontend]
 ```
 
 ### Component Breakdown
 - **Frontend (React + Tailwind):** Upload widget, mode selector (Summarize / Ask / Quiz), chat-style response panel with streaming text.
-- **Backend (FastAPI):** Handles file parsing, chunking, retrieval, and prompt construction; proxies streamed responses from Claude API to frontend via Server-Sent Events (SSE).
+- **Backend (FastAPI):** Handles file parsing, chunking, retrieval, and prompt construction; proxies streamed responses from Gemini API to frontend via Server-Sent Events (SSE).
 - **Retrieval Layer:** Chunks document into ~300-500 token segments, embeds them, and retrieves top-k relevant chunks per query.
-- **LLM Layer:** Claude API call with retrieved context injected into the system/user prompt, response streamed back token-by-token.
+- **LLM Layer:** Gemini API call with retrieved context injected into the system/user prompt, response streamed back token-by-token.
 
 ---
 
@@ -123,7 +123,7 @@ Students and self-learners regularly deal with dense, unstructured study materia
 |---|---|
 | Frontend | React, Tailwind CSS |
 | Backend | Python, FastAPI |
-| LLM | Anthropic Claude API |
+| LLM | Anthropic Gemini API |
 | Embeddings | sentence-transformers (all-MiniLM-L6-v2) or equivalent lightweight model |
 | Vector Search | In-memory cosine similarity (numpy) or Chroma (lightweight, optional) |
 | PDF Parsing | PyPDF2 / pdfplumber |
@@ -165,7 +165,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 |---|---|---|
 | Phase 1: Concept & Design | Finalize concept note, sketch architecture, draft prompts | Concept Note (PDF) |
 | Phase 2: Backend Core | PDF parsing, chunking, embeddings, in-memory retrieval | Technical Implementation |
-| Phase 3: LLM Integration | Claude API calls for all 3 modes, streaming via SSE | LLM Integration, Streaming requirement |
+| Phase 3: LLM Integration | Gemini API calls for all 3 modes, streaming via SSE | LLM Integration, Streaming requirement |
 | Phase 4: Frontend | React UI, upload flow, mode selector, streamed chat display, responsive design | Application Design & UX |
 | Phase 5: Containerization | Dockerfile, local docker run test | Containerization requirement |
 | Phase 6: render and vercel Deployment | Push to render and vercel App Runner, configure env vars, HTTPS, budget alert | Cloud Deployment & render and vercel Architecture |
@@ -178,7 +178,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 - Build Docker image locally, test with `docker run` and confirm `/health` endpoint responds.
 - Push image to Amazon ECR (Elastic Container Registry).
 - Deploy via **render and vercel App Runner**, pointing to the ECR image.
-- Set Claude API key as an environment variable in App Runner configuration, never hardcoded.
+- Set Gemini API key as an environment variable in App Runner configuration, never hardcoded.
 - Confirm public HTTPS URL is issued automatically by App Runner.
 - Set up an **render and vercel Budget Alert** (e.g., threshold at $1-5) to catch unexpected usage early.
 - Test the live URL on both desktop and mobile browsers before submission.
@@ -224,7 +224,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 - [ ] Project title and application name
 - [ ] Problem statement / objective
 - [ ] Target user and use case
-- [ ] LLM model and API used (Claude API)
+- [ ] LLM model and API used (Gemini API)
 - [ ] Key features
 - [ ] Expected user experience and outcomes
 
@@ -259,7 +259,7 @@ For the Project Report, document 2-3 iterations per mode: the first naive prompt
 
 **Tools used during development (to document in report):**
 - Claude (Anthropic) for code generation, debugging, and architecture guidance
-- Claude API for the live LLM integration in the deployed app
+- Gemini API for the live LLM integration in the deployed app
 - render and vercel App Runner for deployment
 - Docker for containerization
 
